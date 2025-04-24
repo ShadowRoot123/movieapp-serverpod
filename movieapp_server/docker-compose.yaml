@@ -1,0 +1,44 @@
+services:
+  # Development services
+  postgres:
+    image: postgres:16.3
+    ports:
+      - "8090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: movieapp
+      POSTGRES_PASSWORD: "SGCEGpaGKVYw2XhT8OhdWSJ0FyVYY4ge"
+    volumes:
+      - movieapp_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6.2.6
+    ports:
+      - "8091:6379"
+    command: redis-server --requirepass "8U0Gctqhdttwgta-cyw0XMMHmLeE7AqW"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+  # Test services
+  postgres_test:
+    image: postgres:16.3
+    ports:
+      - "9090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: movieapp_test
+      POSTGRES_PASSWORD: "UNSlvNtVhQIvpVt8MwVlNfMhwt4jtss3"
+    volumes:
+      - movieapp_test_data:/var/lib/postgresql/data
+
+  redis_test:
+    image: redis:6.2.6
+    ports:
+      - "9091:6379"
+    command: redis-server --requirepass "Kji1Tjr-8o3RMwcr1l37iu3846nK4GdE"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+volumes:
+  movieapp_data:
+  movieapp_test_data:

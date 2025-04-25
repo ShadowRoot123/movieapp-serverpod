@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp_client/movieapp_client.dart';
-import 'package:movieapp_flutter/dependencies.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movieapp_flutter/features/app_user/presentation/widgets/app_user_dropdown.dart';
+import 'package:movieapp_flutter/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:movieapp_flutter/features/movie/presentation/widget/movie_list_widget.dart';
-import 'package:serverpod_auth_email_flutter/serverpod_auth_email_flutter.dart';
 
 class MovieListPage extends StatelessWidget {
   static String route() => '/movies';
@@ -13,7 +13,7 @@ class MovieListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movie List'),
-        //actions: [SignInWithEmailButton(caller: sl<Client>().modules.auth)],
+        actions: [AppUserDropdown()],
       ),
       body: MovieListWidget(),
     );

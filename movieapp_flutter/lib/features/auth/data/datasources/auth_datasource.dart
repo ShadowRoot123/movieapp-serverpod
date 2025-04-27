@@ -64,7 +64,9 @@ class AuthDatasourceImpl implements AuthDataSource {
   @override
   Future<void> logout() async {
     try {
-      await sessionManager.signOutAllDevices();
+      await sessionManager.signOut();
+      print("Logout success");
+      print(sessionManager.signedInUser);
     } catch (e) {
       throw ServerException("Logout failed: ${e.toString()}");
     }

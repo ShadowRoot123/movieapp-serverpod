@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movieapp_flutter/features/app_user/presentation/cubit/app_user_cubit.dart';
-import 'package:movieapp_flutter/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:movieapp_flutter/features/auth/presentation/pages/login_page.dart';
 import 'package:movieapp_flutter/features/movie/presentation/pages/movie_detail_page.dart';
 import 'package:movieapp_flutter/features/movie/presentation/pages/movie_list_page.dart';
@@ -25,7 +24,7 @@ class AppRouter {
       )
     ],
     redirect: (context, state) {
-      final userState = context.read<AuthBloc>().state;
+      final userState = context.read<AppUserCubit>().state;
 
       final publicRoutes = [
         LoginPage.route(),

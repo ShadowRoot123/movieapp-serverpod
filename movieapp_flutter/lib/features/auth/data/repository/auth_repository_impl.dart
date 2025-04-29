@@ -34,6 +34,41 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, User>> confirmRegistration(
+      {required String email, required String verificationCode}) async {
+    try {
+      final user = await authDataSource.confirmRegistration(
+          email: email, verificationCode: verificationCode);
+
+      return right(user);
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> registerWithEmailAndPassword(
+      {required String email,
+      required String password,
+      required String username}) async {
+    try {
+      final result = await authDataSource.registerWithEmailAndPassword(
+        email: email,
+        password: password,
+        username: username,
+      );
+
+      if (result) {
+        return right(true);
+      } else {
+        return left(Failure("Registration failed"));
+      }
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> logout() async {
     try {
       await authDataSource.logout();

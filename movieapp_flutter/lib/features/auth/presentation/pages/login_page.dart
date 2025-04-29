@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movieapp_flutter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:movieapp_flutter/features/auth/presentation/pages/register_page.dart';
 import 'package:movieapp_flutter/features/movie/presentation/pages/movie_list_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -114,7 +115,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 20),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.go(RegisterPage.route());
+                      },
                       child: RichText(
                         text: const TextSpan(
                           children: [

@@ -5,8 +5,10 @@ import 'package:movieapp_flutter/features/auth/data/datasources/auth_datasource.
 import 'package:movieapp_flutter/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:movieapp_flutter/features/auth/domain/repository/auth_repository.dart';
 import 'package:movieapp_flutter/features/auth/domain/usecases/current_user.dart';
+import 'package:movieapp_flutter/features/auth/domain/usecases/user_confirm_registearation.dart';
 import 'package:movieapp_flutter/features/auth/domain/usecases/user_login.dart';
 import 'package:movieapp_flutter/features/auth/domain/usecases/user_logout.dart';
+import 'package:movieapp_flutter/features/auth/domain/usecases/user_registor.dart';
 import 'package:movieapp_flutter/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:movieapp_flutter/features/movie/data/datasources/move_datasource.dart';
 import 'package:movieapp_flutter/features/movie/data/repository/move_repository_impl.dart';
@@ -51,13 +53,24 @@ void _initMovie() {
 void _initAuth() {
   sl.registerFactory<AuthDataSource>(() => AuthDatasourceImpl(sl(), sl()));
   sl.registerFactory<AuthRepository>(() => AuthRepositoryImpl(sl()));
+
   sl.registerFactory<UserLoginUseCase>(() => UserLoginUseCase(sl()));
+
   sl.registerFactory<CurrentUserUseCase>(() => CurrentUserUseCase(sl()));
+
   sl.registerFactory<UserLogoutUseCase>(() => UserLogoutUseCase(sl()));
 
-  sl.registerLazySingleton<AuthBloc>(() => AuthBloc(
-      userLoginUseCase: sl(),
-      appUserCubit: sl(),
-      currentUser: sl(),
-      userLogout: sl()));
+  sl.registerFactory<UserRegisterUseCase>(() => UserRegisterUseCase(sl()));
+  sl.registerFactory<UserConfirmRegistrationUseCase>(
+      () => UserConfirmRegistrationUseCase(sl()));
+
+  sl.registerLazySingleton<AuthBloc>(
+    () => AuthBloc(
+        userLoginUseCase: sl(),
+        appUserCubit: sl(),
+        currentUser: sl(),
+        userLogout: sl(),
+        userRegister: sl(),
+        userConfirmRegistration: sl()),
+  );
 }

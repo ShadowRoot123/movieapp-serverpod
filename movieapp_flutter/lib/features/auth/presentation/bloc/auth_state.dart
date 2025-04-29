@@ -18,3 +18,10 @@ final class AuthStateFailure extends AuthState {
 
   AuthStateFailure(this.message);
 }
+
+final class AuthStateConfirmationRequired extends AuthState {
+  final String email;
+  final String password;
+
+  AuthStateConfirmationRequired({required this.email, required this.password});
+}

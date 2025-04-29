@@ -10,6 +10,16 @@ abstract interface class AuthDataSource {
     required String email,
     required String password,
   });
+
+  Future<bool> registerWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String username,
+  });
+  Future<UserModel> confirmRegistration({
+    required String email,
+    required String verificationCode,
+  });
   Future<void> logout();
 }
 
@@ -46,6 +56,43 @@ class AuthDatasourceImpl implements AuthDataSource {
           id: result.userInfo!.id!,
           username: result.userInfo!.userName!,
           email: result.userInfo!.email!);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> registerWithEmailAndPassword(
+      {required String email,
+      required String password,
+      required String username}) async {
+    try {
+      final result = await client.modules.auth.email
+          .createAccountRequest(username, email, password);
+
+      if (result == false) {
+        throw ServerException("Failed to create account");
+      }
+      return true;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> confirmRegistration(
+      {required String email, required String verificationCode}) async {
+    try {
+      final result = await client.modules.auth.email
+          .createAccount(email, verificationCode);
+      if (result == null) {
+        throw ServerException("User was null");
+      }
+      if (result.id == null || result.userName == null) {
+        throw ServerException("User id or userName not found");
+      }
+      return UserModel(
+          id: result.id!, username: result.userName!, email: result.email!);
     } catch (e) {
       throw ServerException(e.toString());
     }

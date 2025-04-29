@@ -8,6 +8,16 @@ abstract interface class AuthRepository {
     required String password,
   });
 
+  Future<Either<Failure, bool>> registerWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String username,
+  });
+  Future<Either<Failure, User>> confirmRegistration({
+    required String email,
+    required String verificationCode,
+  });
+
   Either<Failure, User> currentUser();
 
   Future<Either<Failure, void>> logout();

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_bloc.dart';
 import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_event.dart';
 import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_state.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/movie_manage/movie_manage_bloc.dart';
 import 'package:movieapp_flutter/features/movie/presentation/pages/movie_edit_page.dart';
 
 class MovieDetailPage extends StatefulWidget {
@@ -83,6 +82,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     movie.logline,
                     style: TextStyle(fontSize: 16),
                   ),
+                  if (movie.imageUrl.isNotEmpty)
+                    Image.network(
+                      movie.imageUrl,
+                      width: double.infinity,
+                    )
                 ],
               ),
             );

@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movieapp_client/movieapp_client.dart';
+import 'package:movieapp_flutter/features/asset/presentation/widgets/upload_file_widget.dart';
 import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_event.dart';
 import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_list_bloc.dart';
 import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_state.dart';
@@ -32,6 +32,8 @@ class _MovieEditPageState extends State<MovieEditPage> {
   final _yearController = TextEditingController();
   final _loglineController = TextEditingController();
   final _dirctorNameController = TextEditingController();
+
+  String imageUrl = "";
 
   bool get isEditing {
     return widget.movieId != null && widget.movieId != 0;
@@ -62,7 +64,7 @@ class _MovieEditPageState extends State<MovieEditPage> {
                   title: _titleController.text,
                   year: int.parse(_yearController.text),
                   logline: _loglineController.text,
-                  imageUrl: "",
+                  imageUrl: imageUrl,
                   directorname: _dirctorNameController.text,
                 );
                 context.read<MovieManageBloc>().add(
@@ -139,6 +141,18 @@ class _MovieEditPageState extends State<MovieEditPage> {
                         return null;
                       },
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0, vertical: 16),
+                      child: UploadFileWidget(
+                          url: imageUrl,
+                          label: "Movie poster Image",
+                          onComplet: (url) {
+                            setState(() {
+                              imageUrl = url;
+                            });
+                          }),
+                    ),
                     if (isEditing)
                       Padding(
                         padding: EdgeInsets.all(8),
@@ -193,6 +207,10 @@ class _MovieEditPageState extends State<MovieEditPage> {
           _yearController.text = state.movie.year.toString();
           _loglineController.text = state.movie.logline;
           _dirctorNameController.text = state.movie.directorname;
+
+          setState(() {
+            imageUrl = state.movie.imageUrl;
+          });
         }
       }),
     );

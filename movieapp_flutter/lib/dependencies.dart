@@ -1,6 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:movieapp_client/movieapp_client.dart';
 import 'package:movieapp_flutter/features/app_user/presentation/cubit/app_user_cubit.dart';
+import 'package:movieapp_flutter/features/asset/data/datasource/asset_data_source.dart';
+import 'package:movieapp_flutter/features/asset/data/repository/asset_repository_impl.dart';
+import 'package:movieapp_flutter/features/asset/domain/repository/asset_repository.dart';
+import 'package:movieapp_flutter/features/asset/domain/usecase/upload_image.dart';
+import 'package:movieapp_flutter/features/asset/presentation/bloc/asset_bloc.dart';
 import 'package:movieapp_flutter/features/auth/data/datasources/auth_datasource.dart';
 import 'package:movieapp_flutter/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:movieapp_flutter/features/auth/domain/repository/auth_repository.dart';
@@ -37,6 +42,7 @@ Future<void> initDependencies() async {
   await sl<SessionManager>().initialize();
   _initAuth();
   _initMovie();
+  _initAsset();
 }
 
 void _initMovie() {
@@ -84,4 +90,15 @@ void _initAuth() {
         userRegister: sl(),
         userConfirmRegistration: sl()),
   );
+}
+
+void _initAsset() {
+  sl.registerFactory<AssetDataSource>(() => AssetDataSourceImpl(sl()));
+
+  sl.registerFactory<AssetRepository>(() => AssetRepositoryImpl(sl()));
+
+  sl.registerFactory<UploadImageUsecase>(() => UploadImageUsecase(sl()));
+
+  sl.registerLazySingleton<AssetBloc>(
+      () => AssetBloc(uploadImageUsecase: sl()));
 }

@@ -7,6 +7,9 @@ import 'src/generated/endpoints.dart';
 
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as auth;
 
+import 'package:serverpod_cloud_storage_s3/serverpod_cloud_storage_s3.dart'
+    as s3;
+
 // This is the starting point of your Serverpod server. In most cases, you will
 // only need to make additions to this file if you add future calls,  are
 // configuring Relic (Serverpod's web-server), or need custom setup work.
@@ -44,6 +47,14 @@ void run(List<String> args) async {
     '/*',
   );
 
+  // Setup the S3 storage.
+  pod.addCloudStorage(s3.S3CloudStorage(
+    serverpod: pod,
+    storageId: 'public',
+    public: true,
+    region: 'us-east-1',
+    bucket: 'movieapp-serverpod',
+  ));
   // Start the server.
   await pod.start();
 }

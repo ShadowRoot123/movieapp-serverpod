@@ -26,4 +26,22 @@ class MoveRepositoryImpl implements MovieRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, Movie>> save(Movie move) async {
+    try {
+      return right(await datasource.save(move));
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> delete(int id) async {
+    try {
+      return right(await datasource.delete(id));
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
 }

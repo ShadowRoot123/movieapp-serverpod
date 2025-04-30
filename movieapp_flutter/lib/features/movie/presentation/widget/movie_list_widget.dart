@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/move_event.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/move_list_bloc.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/move_state.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_event.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_list_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_state.dart';
 import 'package:movieapp_flutter/features/movie/presentation/pages/movie_detail_page.dart';
 
 class MovieListWidget extends StatefulWidget {
@@ -17,7 +17,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   @override
   void initState() {
     super.initState();
-    context.read<MoveListBloc>().add(FeachMovieListEvent());
+    context.read<MovieListBloc>().add(FeachMovieListEvent());
   }
 
   @override
@@ -28,7 +28,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MoveListBloc, MovieListState>(
+    return BlocBuilder<MovieListBloc, MovieListState>(
       builder: (context, state) {
         switch (state) {
           case MovieListInitial():

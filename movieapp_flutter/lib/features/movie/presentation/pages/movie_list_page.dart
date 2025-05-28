@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movieapp_flutter/features/app_user/presentation/widgets/app_user_dropdown.dart';
-import 'package:movieapp_flutter/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/pages/movie_edit_page.dart';
 import 'package:movieapp_flutter/features/movie/presentation/widget/movie_list_widget.dart';
 
 class MovieListPage extends StatelessWidget {
@@ -14,6 +14,12 @@ class MovieListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Movie List'),
         actions: [AppUserDropdown()],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push(MovieEditPage.routeNew());
+        },
+        child: const Icon(Icons.add),
       ),
       body: MovieListWidget(),
     );

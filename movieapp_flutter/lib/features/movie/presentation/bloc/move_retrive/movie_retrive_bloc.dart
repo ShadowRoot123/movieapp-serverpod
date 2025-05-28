@@ -2,8 +2,8 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp_flutter/features/movie/domain/usecases/retrive_move.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/move_retrive_event.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/move_retrive_state.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_event.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_state.dart';
 
 class MoveRetriveBloc extends Bloc<MovieRetriveEvent, MovieRetriveState> {
   final RetriveMoveUsecase retriveMoveUsecase;

@@ -2,9 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/move_retrive_bloc.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/move_retrive_event.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/move_retrive_state.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_event.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_state.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/movie_manage/movie_manage_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/pages/movie_edit_page.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static String route({int? movieid}) => '/movies/${movieid ?? ':id'}';
@@ -54,6 +56,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             return Scaffold(
               appBar: AppBar(
                 title: Text(movie.title),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      context.push(MovieEditPage.route(movie.id));
+                    },
+                    icon: Icon(Icons.edit),
+                  ),
+                ],
               ),
               body: Column(
                 children: [

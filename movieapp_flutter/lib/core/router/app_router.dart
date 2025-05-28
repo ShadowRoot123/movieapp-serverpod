@@ -5,6 +5,7 @@ import 'package:movieapp_flutter/features/auth/presentation/pages/login_page.dar
 import 'package:movieapp_flutter/features/auth/presentation/pages/register_confirmation_page.dart';
 import 'package:movieapp_flutter/features/auth/presentation/pages/register_page.dart';
 import 'package:movieapp_flutter/features/movie/presentation/pages/movie_detail_page.dart';
+import 'package:movieapp_flutter/features/movie/presentation/pages/movie_edit_page.dart';
 import 'package:movieapp_flutter/features/movie/presentation/pages/movie_list_page.dart';
 
 class AppRouter {
@@ -31,6 +32,16 @@ class AppRouter {
       GoRoute(
         path: RegisterConfirmationPage.route(),
         builder: (context, state) => RegisterConfirmationPage(),
+      ),
+      GoRoute(
+        path: MovieEditPage.route(),
+        builder: (context, state) => MovieEditPage(
+          movieId: int.parse(state.pathParameters['id'] ?? '0'),
+        ),
+      ),
+      GoRoute(
+        path: MovieEditPage.routeNew(),
+        builder: (context, state) => MovieEditPage(),
       ),
     ],
     redirect: (context, state) {

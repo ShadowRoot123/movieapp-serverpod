@@ -4,8 +4,9 @@ import 'package:movieapp_flutter/features/app_user/presentation/cubit/app_user_c
 import 'package:movieapp_flutter/core/router/app_router.dart';
 import 'package:movieapp_flutter/dependencies.dart';
 import 'package:movieapp_flutter/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/move_list_bloc.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/move_retrive_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_list_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/movie_manage/movie_manage_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,10 +15,13 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<AppUserCubit>()),
-        BlocProvider(create: (_) => sl<MoveListBloc>()),
+        BlocProvider(create: (_) => sl<MovieListBloc>()),
         BlocProvider(create: (_) => sl<MoveRetriveBloc>()),
         BlocProvider(
             create: (_) => sl<AuthBloc>()..add(AuthIsUserLoggedInEvent())),
+        BlocProvider(
+          create: (_) => sl<MovieManageBloc>(),
+        )
       ],
       child: const MyApp(),
     ),

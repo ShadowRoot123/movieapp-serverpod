@@ -13,10 +13,13 @@ import 'package:movieapp_flutter/features/auth/presentation/bloc/auth_bloc.dart'
 import 'package:movieapp_flutter/features/movie/data/datasources/move_datasource.dart';
 import 'package:movieapp_flutter/features/movie/data/repository/move_repository_impl.dart';
 import 'package:movieapp_flutter/features/movie/domain/repository/move_repository.dart';
+import 'package:movieapp_flutter/features/movie/domain/usecases/delete_movie.dart';
 import 'package:movieapp_flutter/features/movie/domain/usecases/list_movies.dart';
 import 'package:movieapp_flutter/features/movie/domain/usecases/retrive_move.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/move_list_bloc.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/move_retrive_bloc.dart';
+import 'package:movieapp_flutter/features/movie/domain/usecases/save_movie.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_list_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_retrive/movie_retrive_bloc.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/movie_manage/movie_manage_bloc.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
@@ -45,9 +48,17 @@ void _initMovie() {
 
   sl.registerFactory<RetriveMoveUsecase>(() => RetriveMoveUsecase(sl()));
 
-  sl.registerLazySingleton(() => MoveListBloc(listMoviesUseCase: sl()));
+  sl.registerFactory<SaveMoveUsecase>(() => SaveMoveUsecase(sl()));
+
+  sl.registerFactory<DeleteMoveUsecase>(() => DeleteMoveUsecase(sl()));
+
+  sl.registerLazySingleton(() => MovieListBloc(listMoviesUseCase: sl()));
 
   sl.registerLazySingleton(() => MoveRetriveBloc(retriveMoveUsecase: sl()));
+  sl.registerLazySingleton(() => MovieManageBloc(
+      saveMoveUsecase: sl(),
+      deleteMoveUsecase: sl(),
+      retriveMoveUsecase: sl()));
 }
 
 void _initAuth() {

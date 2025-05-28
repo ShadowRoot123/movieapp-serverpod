@@ -2,16 +2,16 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/move_event.dart';
-import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/move_state.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_event.dart';
+import 'package:movieapp_flutter/features/movie/presentation/bloc/move_list/movie_state.dart';
 
 import '../../../../../core/usecases/usecase.dart';
 import '../../../domain/usecases/list_movies.dart';
 
-class MoveListBloc extends Bloc<MovieListEvent, MovieListState> {
+class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   final ListMoviesUseCase listMoviesUseCase;
 
-  MoveListBloc({
+  MovieListBloc({
     required this.listMoviesUseCase,
   }) : super(MovieListInitial()) {
     on<MovieListEvent>((event, emit) => emit(MovieListLoading()));

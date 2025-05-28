@@ -4,6 +4,8 @@ import 'package:movieapp_flutter/core/error/exception.dart';
 abstract interface class MovieDatasource {
   Future<List<Movie>> list();
   Future<Movie> retrive(int id);
+  Future<Movie> save(Movie movie);
+  Future<void> delete(int id);
 }
 
 class MoveDatasourceImpl implements MovieDatasource {
@@ -29,6 +31,28 @@ class MoveDatasourceImpl implements MovieDatasource {
         throw ServerException("Movie not found");
       }
       return result;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<Movie> save(Movie movie) async {
+    try {
+      final result = await client.movie.save(movie);
+      if (result == null) {
+        throw ServerException("Movie not found");
+      }
+      return result;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> delete(int id) {
+    try {
+      return client.movie.delete(id);
     } catch (e) {
       throw ServerException(e.toString());
     }

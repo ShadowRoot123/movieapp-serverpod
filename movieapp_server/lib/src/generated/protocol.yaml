@@ -3,4 +3,5 @@ example:
 movie:
   - list:
   - retrive:
-  - create:
+  - save:
+  - delete:

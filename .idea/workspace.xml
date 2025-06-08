@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e0c73363-0a55-473c-a622-52aee4368837" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/movieapp_client/lib/src/protocol/client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_client/lib/src/protocol/client.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_client/lib/src/protocol/move.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_client/lib/src/protocol/protocol.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_client/lib/src/protocol/protocol.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_flutter/lib/dependencies.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_flutter/lib/dependencies.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/move_retrive/movie_retrive_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/move_retrive/movie_retrive_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/move_retrive/movie_retrive_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/move_retrive/movie_retrive_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/movie_manage/movie_manage_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/movie_manage/movie_manage_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/movie_manage/movie_manage_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/movie_manage/movie_manage_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/movie_manage/movie_manage_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/bloc/movie_manage/movie_manage_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/pages/movie_edit_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_flutter/lib/features/movie/presentation/pages/movie_edit_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_server/lib/src/generated/endpoints.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_server/lib/src/generated/endpoints.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_server/lib/src/generated/move.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_server/lib/src/generated/protocol.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_server/lib/src/generated/protocol.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_server/lib/src/generated/protocol.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_server/lib/src/generated/protocol.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_server/lib/src/models/move.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movieapp_server/test/integration/test_tools/serverpod_test_tools.dart" beforeDir="false" afterPath="$PROJECT_DIR$/movieapp_server/test/integration/test_tools/serverpod_test_tools.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ShadowRoot123"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:ShadowRoot123/movieapp-serverpod.git",
+    "accountId": "bdd4c798-476b-4c2c-9fc6-c24cac96f707"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2wSvz5hGq8IQvIvHxsDgRY6cCvw" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "feature/file-upload",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/HP/Documents/projects/serverpod/movieapp",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e0c73363-0a55-473c-a622-52aee4368837" name="Changes" comment="" />
+      <created>1746048048727</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746048048727</updated>
+    </task>
+    <servers />
+  </component>
+</project>

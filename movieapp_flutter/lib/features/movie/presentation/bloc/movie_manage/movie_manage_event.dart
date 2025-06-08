@@ -15,6 +15,12 @@ final class MovieManageSaveEvent extends MovieManageEvent {
   MovieManageSaveEvent({required this.movie});
 }
 
+final class MovieManageSaveDetailEvent extends MovieManageEvent {
+  final MovieDetail movieDetail;
+
+  MovieManageSaveDetailEvent({required this.movieDetail});
+}
+
 final class MovieManageDeleteEvent extends MovieManageEvent {
   final int id;
 

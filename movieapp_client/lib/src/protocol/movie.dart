@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'movie_details.dart' as _i2;
 
 abstract class Movie implements _i1.SerializableModel {
   Movie._({
@@ -19,6 +20,7 @@ abstract class Movie implements _i1.SerializableModel {
     required this.imageUrl,
     required this.logline,
     required this.directorname,
+    this.movieDetail,
   });
 
   factory Movie({
@@ -28,6 +30,7 @@ abstract class Movie implements _i1.SerializableModel {
     required String imageUrl,
     required String logline,
     required String directorname,
+    _i2.MovieDetail? movieDetail,
   }) = _MovieImpl;
 
   factory Movie.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -38,6 +41,10 @@ abstract class Movie implements _i1.SerializableModel {
       imageUrl: jsonSerialization['imageUrl'] as String,
       logline: jsonSerialization['logline'] as String,
       directorname: jsonSerialization['directorname'] as String,
+      movieDetail: jsonSerialization['movieDetail'] == null
+          ? null
+          : _i2.MovieDetail.fromJson(
+              (jsonSerialization['movieDetail'] as Map<String, dynamic>)),
     );
   }
 
@@ -56,6 +63,8 @@ abstract class Movie implements _i1.SerializableModel {
 
   String directorname;
 
+  _i2.MovieDetail? movieDetail;
+
   /// Returns a shallow copy of this [Movie]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
@@ -66,6 +75,7 @@ abstract class Movie implements _i1.SerializableModel {
     String? imageUrl,
     String? logline,
     String? directorname,
+    _i2.MovieDetail? movieDetail,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -76,6 +86,7 @@ abstract class Movie implements _i1.SerializableModel {
       'imageUrl': imageUrl,
       'logline': logline,
       'directorname': directorname,
+      if (movieDetail != null) 'movieDetail': movieDetail?.toJson(),
     };
   }
 
@@ -95,6 +106,7 @@ class _MovieImpl extends Movie {
     required String imageUrl,
     required String logline,
     required String directorname,
+    _i2.MovieDetail? movieDetail,
   }) : super._(
           id: id,
           title: title,
@@ -102,6 +114,7 @@ class _MovieImpl extends Movie {
           imageUrl: imageUrl,
           logline: logline,
           directorname: directorname,
+          movieDetail: movieDetail,
         );
 
   /// Returns a shallow copy of this [Movie]
@@ -115,6 +128,7 @@ class _MovieImpl extends Movie {
     String? imageUrl,
     String? logline,
     String? directorname,
+    Object? movieDetail = _Undefined,
   }) {
     return Movie(
       id: id is int? ? id : this.id,
@@ -123,6 +137,9 @@ class _MovieImpl extends Movie {
       imageUrl: imageUrl ?? this.imageUrl,
       logline: logline ?? this.logline,
       directorname: directorname ?? this.directorname,
+      movieDetail: movieDetail is _i2.MovieDetail?
+          ? movieDetail
+          : this.movieDetail?.copyWith(),
     );
   }
 }

@@ -72,6 +72,15 @@ class _MovieEditPageState extends State<MovieEditPage> {
                         movie: movie,
                       ),
                     );
+
+                final movieDetail = MovieDetail(
+                    movieId: widget.movieId ?? 0,
+                    budget: 23333,
+                    boxOffice: 23333,
+                    awards: "awardes");
+                context.read<MovieManageBloc>().add(
+                      MovieManageSaveDetailEvent(movieDetail: movieDetail),
+                    );
               }
             },
             icon: const Icon(Icons.save),

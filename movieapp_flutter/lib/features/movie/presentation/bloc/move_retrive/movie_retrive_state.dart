@@ -12,8 +12,12 @@ final class MovieRetriveLoading extends MovieRetriveState {}
 
 final class MovieRetriveSuccess extends MovieRetriveState {
   final Movie movie;
+  final MovieDetail movieDetail;
 
-  const MovieRetriveSuccess(this.movie);
+  const MovieRetriveSuccess({
+    required this.movie,
+    required this.movieDetail,
+  });
 }
 
 final class MovieRetriveError extends MovieRetriveState {

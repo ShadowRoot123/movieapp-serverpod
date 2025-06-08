@@ -25,4 +25,10 @@ final class MovieManageStateSaveSuccess extends MovieManageState {
   MovieManageStateSaveSuccess({required this.movie});
 }
 
+final class MovieManageStateSaveDetailSuccess extends MovieManageState {
+  final MovieDetail movieDetail;
+
+  MovieManageStateSaveDetailSuccess({required this.movieDetail});
+}
+
 final class MovieManageStateDeleteSuccess extends MovieManageState {}

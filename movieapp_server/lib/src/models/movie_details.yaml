@@ -1,0 +1,15 @@
+class: MovieDetail
+table: movie_details
+
+fields:
+  movieId: int
+  movie: Movie?, relation(name=movie_movieDetail, field=movieId)
+  runtime: int?
+  budget: double?
+  boxOffice: double?
+  awards: String?
+
+indexes:
+  movie_detail_unique_idx:
+    fields: movieId
+    unique: true

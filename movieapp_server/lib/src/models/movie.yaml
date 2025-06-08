@@ -7,3 +7,4 @@ fields:
   imageUrl: String
   logline: String
   directorname: String
+  movieDetail: MovieDetail?, relation(name=movie_movieDetail)

@@ -9,6 +9,7 @@ import 'package:movieapp_client/movieapp_client.dart';
 import 'package:movieapp_flutter/features/movie/domain/usecases/delete_movie.dart';
 import 'package:movieapp_flutter/features/movie/domain/usecases/retrive_move.dart';
 import 'package:movieapp_flutter/features/movie/domain/usecases/save_movie.dart';
+import 'package:movieapp_flutter/features/movie/domain/usecases/save_movie_detail_usecase.dart';
 
 part 'movie_manage_event.dart';
 part 'movie_manage_state.dart';
@@ -17,16 +18,19 @@ class MovieManageBloc extends Bloc<MovieManageEvent, MovieManageState> {
   final SaveMoveUsecase saveMoveUsecase;
   final DeleteMoveUsecase deleteMoveUsecase;
   final RetriveMoveUsecase retriveMoveUsecase;
+  final SaveMovieDetailUseCase saveMovieDetailUseCase;
 
   MovieManageBloc({
     required this.saveMoveUsecase,
     required this.deleteMoveUsecase,
     required this.retriveMoveUsecase,
+    required this.saveMovieDetailUseCase,
   }) : super(MovieManageStateInitial()) {
     on<MovieManageEvent>((event, emit) => emit(MovieManageStateLoading()));
     on<MovieManageRetriveEvent>(_onRetriveMove);
     on<MovieManageSaveEvent>(_onSaveMove);
     on<MovieManageDeleteEvent>(_onDeleteMove);
+    on<MovieManageSaveDetailEvent>(_onSaveMoveDetail);
   }
 
   FutureOr<void> _onRetriveMove(
@@ -51,6 +55,21 @@ class MovieManageBloc extends Bloc<MovieManageEvent, MovieManageState> {
       },
       (movie) {
         emit(MovieManageStateSaveSuccess(movie: movie));
+      },
+    );
+  }
+
+  FutureOr<void> _onSaveMoveDetail(
+      MovieManageSaveDetailEvent event, Emitter<MovieManageState> emit) async {
+    final result = await saveMovieDetailUseCase(
+        SaveMovieDetailParams(movieDetail: event.movieDetail));
+
+    result.fold(
+      (failure) {
+        emit(MovieManageStateFailur(message: failure.message));
+      },
+      (movieDetail) {
+        emit(MovieManageStateSaveDetailSuccess(movieDetail: movieDetail));
       },
     );
   }

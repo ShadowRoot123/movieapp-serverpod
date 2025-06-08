@@ -3,6 +3,10 @@ asset:
   - verifyUpload:
 example:
   - hello:
+movieDetail:
+  - getByMovieId:
+  - save:
+  - deleteByMovieId:
 movie:
   - list:
   - retrive:

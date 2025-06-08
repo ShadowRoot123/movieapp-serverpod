@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'movie_details.dart' as _i2;
 
 abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
   Movie._({
@@ -19,6 +20,7 @@ abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
     required this.imageUrl,
     required this.logline,
     required this.directorname,
+    this.movieDetail,
   });
 
   factory Movie({
@@ -28,6 +30,7 @@ abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
     required String imageUrl,
     required String logline,
     required String directorname,
+    _i2.MovieDetail? movieDetail,
   }) = _MovieImpl;
 
   factory Movie.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -38,6 +41,10 @@ abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
       imageUrl: jsonSerialization['imageUrl'] as String,
       logline: jsonSerialization['logline'] as String,
       directorname: jsonSerialization['directorname'] as String,
+      movieDetail: jsonSerialization['movieDetail'] == null
+          ? null
+          : _i2.MovieDetail.fromJson(
+              (jsonSerialization['movieDetail'] as Map<String, dynamic>)),
     );
   }
 
@@ -58,6 +65,8 @@ abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
 
   String directorname;
 
+  _i2.MovieDetail? movieDetail;
+
   @override
   _i1.Table<int> get table => t;
 
@@ -71,6 +80,7 @@ abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
     String? imageUrl,
     String? logline,
     String? directorname,
+    _i2.MovieDetail? movieDetail,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -81,6 +91,7 @@ abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
       'imageUrl': imageUrl,
       'logline': logline,
       'directorname': directorname,
+      if (movieDetail != null) 'movieDetail': movieDetail?.toJson(),
     };
   }
 
@@ -93,11 +104,12 @@ abstract class Movie implements _i1.TableRow<int>, _i1.ProtocolSerialization {
       'imageUrl': imageUrl,
       'logline': logline,
       'directorname': directorname,
+      if (movieDetail != null) 'movieDetail': movieDetail?.toJsonForProtocol(),
     };
   }
 
-  static MovieInclude include() {
-    return MovieInclude._();
+  static MovieInclude include({_i2.MovieDetailInclude? movieDetail}) {
+    return MovieInclude._(movieDetail: movieDetail);
   }
 
   static MovieIncludeList includeList({
@@ -136,6 +148,7 @@ class _MovieImpl extends Movie {
     required String imageUrl,
     required String logline,
     required String directorname,
+    _i2.MovieDetail? movieDetail,
   }) : super._(
           id: id,
           title: title,
@@ -143,6 +156,7 @@ class _MovieImpl extends Movie {
           imageUrl: imageUrl,
           logline: logline,
           directorname: directorname,
+          movieDetail: movieDetail,
         );
 
   /// Returns a shallow copy of this [Movie]
@@ -156,6 +170,7 @@ class _MovieImpl extends Movie {
     String? imageUrl,
     String? logline,
     String? directorname,
+    Object? movieDetail = _Undefined,
   }) {
     return Movie(
       id: id is int? ? id : this.id,
@@ -164,6 +179,9 @@ class _MovieImpl extends Movie {
       imageUrl: imageUrl ?? this.imageUrl,
       logline: logline ?? this.logline,
       directorname: directorname ?? this.directorname,
+      movieDetail: movieDetail is _i2.MovieDetail?
+          ? movieDetail
+          : this.movieDetail?.copyWith(),
     );
   }
 }
@@ -202,6 +220,21 @@ class MovieTable extends _i1.Table<int> {
 
   late final _i1.ColumnString directorname;
 
+  _i2.MovieDetailTable? _movieDetail;
+
+  _i2.MovieDetailTable get movieDetail {
+    if (_movieDetail != null) return _movieDetail!;
+    _movieDetail = _i1.createRelationTable(
+      relationFieldName: 'movieDetail',
+      field: Movie.t.id,
+      foreignField: _i2.MovieDetail.t.movieId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.MovieDetailTable(tableRelation: foreignTableRelation),
+    );
+    return _movieDetail!;
+  }
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -211,13 +244,25 @@ class MovieTable extends _i1.Table<int> {
         logline,
         directorname,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'movieDetail') {
+      return movieDetail;
+    }
+    return null;
+  }
 }
 
 class MovieInclude extends _i1.IncludeObject {
-  MovieInclude._();
+  MovieInclude._({_i2.MovieDetailInclude? movieDetail}) {
+    _movieDetail = movieDetail;
+  }
+
+  _i2.MovieDetailInclude? _movieDetail;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'movieDetail': _movieDetail};
 
   @override
   _i1.Table<int> get table => Movie.t;
@@ -245,6 +290,10 @@ class MovieIncludeList extends _i1.IncludeList {
 
 class MovieRepository {
   const MovieRepository._();
+
+  final attachRow = const MovieAttachRowRepository._();
+
+  final detachRow = const MovieDetachRowRepository._();
 
   /// Returns a list of [Movie]s matching the given query parameters.
   ///
@@ -277,6 +326,7 @@ class MovieRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<MovieTable>? orderByList,
     _i1.Transaction? transaction,
+    MovieInclude? include,
   }) async {
     return session.db.find<Movie>(
       where: where?.call(Movie.t),
@@ -286,6 +336,7 @@ class MovieRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -314,6 +365,7 @@ class MovieRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<MovieTable>? orderByList,
     _i1.Transaction? transaction,
+    MovieInclude? include,
   }) async {
     return session.db.findFirstRow<Movie>(
       where: where?.call(Movie.t),
@@ -322,6 +374,7 @@ class MovieRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -330,10 +383,12 @@ class MovieRepository {
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
+    MovieInclude? include,
   }) async {
     return session.db.findById<Movie>(
       id,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -451,6 +506,67 @@ class MovieRepository {
     return session.db.count<Movie>(
       where: where?.call(Movie.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+}
+
+class MovieAttachRowRepository {
+  const MovieAttachRowRepository._();
+
+  /// Creates a relation between the given [Movie] and [MovieDetail]
+  /// by setting the [Movie]'s foreign key `id` to refer to the [MovieDetail].
+  Future<void> movieDetail(
+    _i1.Session session,
+    Movie movie,
+    _i2.MovieDetail movieDetail, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (movieDetail.id == null) {
+      throw ArgumentError.notNull('movieDetail.id');
+    }
+    if (movie.id == null) {
+      throw ArgumentError.notNull('movie.id');
+    }
+
+    var $movieDetail = movieDetail.copyWith(movieId: movie.id);
+    await session.db.updateRow<_i2.MovieDetail>(
+      $movieDetail,
+      columns: [_i2.MovieDetail.t.movieId],
+      transaction: transaction,
+    );
+  }
+}
+
+class MovieDetachRowRepository {
+  const MovieDetachRowRepository._();
+
+  /// Detaches the relation between this [Movie] and the [MovieDetail] set in `movieDetail`
+  /// by setting the [Movie]'s foreign key `id` to `null`.
+  ///
+  /// This removes the association between the two models without deleting
+  /// the related record.
+  Future<void> movieDetail(
+    _i1.Session session,
+    Movie movie, {
+    _i1.Transaction? transaction,
+  }) async {
+    var $movieDetail = movie.movieDetail;
+
+    if ($movieDetail == null) {
+      throw ArgumentError.notNull('movie.movieDetail');
+    }
+    if ($movieDetail.id == null) {
+      throw ArgumentError.notNull('movie.movieDetail.id');
+    }
+    if (movie.id == null) {
+      throw ArgumentError.notNull('movie.id');
+    }
+
+    var $$movieDetail = $movieDetail.copyWith(movieId: null);
+    await session.db.updateRow<_i2.MovieDetail>(
+      $$movieDetail,
+      columns: [_i2.MovieDetail.t.movieId],
       transaction: transaction,
     );
   }

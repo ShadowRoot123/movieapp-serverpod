@@ -13,10 +13,12 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 import 'example.dart' as _i4;
-import 'move.dart' as _i5;
-import 'package:movieapp_server/src/generated/move.dart' as _i6;
+import 'movie.dart' as _i5;
+import 'movie_details.dart' as _i6;
+import 'package:movieapp_server/src/generated/movie.dart' as _i7;
 export 'example.dart';
-export 'move.dart';
+export 'movie.dart';
+export 'movie_details.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -26,6 +28,92 @@ class Protocol extends _i1.SerializationManagerServer {
   static final Protocol _instance = Protocol._();
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
+    _i2.TableDefinition(
+      name: 'movie_details',
+      dartName: 'MovieDetail',
+      schema: 'public',
+      module: 'movieapp',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'movie_details_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'movieId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'runtime',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'budget',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: true,
+          dartType: 'double?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'boxOffice',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: true,
+          dartType: 'double?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'awards',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'movie_details_fk_0',
+          columns: ['movieId'],
+          referenceTable: 'movies',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'movie_details_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        ),
+        _i2.IndexDefinition(
+          indexName: 'movie_detail_unique_idx',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'movieId',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: false,
+        ),
+      ],
+      managed: true,
+    ),
     _i2.TableDefinition(
       name: 'movies',
       dartName: 'Movie',
@@ -104,14 +192,20 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i5.Movie) {
       return _i5.Movie.fromJson(data) as T;
     }
+    if (t == _i6.MovieDetail) {
+      return _i6.MovieDetail.fromJson(data) as T;
+    }
     if (t == _i1.getType<_i4.Example?>()) {
       return (data != null ? _i4.Example.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i5.Movie?>()) {
       return (data != null ? _i5.Movie.fromJson(data) : null) as T;
     }
-    if (t == List<_i6.Movie>) {
-      return (data as List).map((e) => deserialize<_i6.Movie>(e)).toList() as T;
+    if (t == _i1.getType<_i6.MovieDetail?>()) {
+      return (data != null ? _i6.MovieDetail.fromJson(data) : null) as T;
+    }
+    if (t == List<_i7.Movie>) {
+      return (data as List).map((e) => deserialize<_i7.Movie>(e)).toList() as T;
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
@@ -131,6 +225,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (data is _i5.Movie) {
       return 'Movie';
+    }
+    if (data is _i6.MovieDetail) {
+      return 'MovieDetail';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -154,6 +251,9 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (dataClassName == 'Movie') {
       return deserialize<_i5.Movie>(data['data']);
+    }
+    if (dataClassName == 'MovieDetail') {
+      return deserialize<_i6.MovieDetail>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -183,6 +283,8 @@ class Protocol extends _i1.SerializationManagerServer {
     switch (t) {
       case _i5.Movie:
         return _i5.Movie.t;
+      case _i6.MovieDetail:
+        return _i6.MovieDetail.t;
     }
     return null;
   }

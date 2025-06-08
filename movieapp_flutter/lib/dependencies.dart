@@ -60,11 +60,13 @@ void _initMovie() {
 
   sl.registerLazySingleton(() => MovieListBloc(listMoviesUseCase: sl()));
 
-  sl.registerLazySingleton(() => MoveRetriveBloc(retriveMoveUsecase: sl()));
+  sl.registerLazySingleton(() =>
+      MoveRetriveBloc(retriveMoveUsecase: sl(), getMovieDetailUseCase: sl()));
   sl.registerLazySingleton(() => MovieManageBloc(
       saveMoveUsecase: sl(),
       deleteMoveUsecase: sl(),
-      retriveMoveUsecase: sl()));
+      retriveMoveUsecase: sl(),
+      saveMovieDetailUseCase: sl()));
 }
 
 void _initAuth() {
